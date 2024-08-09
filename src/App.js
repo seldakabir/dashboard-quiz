@@ -1,15 +1,10 @@
 import "./App.css";
+import Header from "./Components/Header";
 
 function App() {
   return (
     <div className="app">
-      <div className="header">
-        <img src="./Images/logo.png" alt="logo" className="logo"></img>
-        <div className="sign">
-          <p>Sing Up</p>
-          <p>Sing In</p>
-        </div>
-      </div>
+      <Header />
       <main className="main">
         <img src="./Images/image.jpg" alt="imag" className="image"></img>
         <div className="main-text">
