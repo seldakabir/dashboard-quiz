@@ -1,23 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <div className="header">
+        <img src="./Images/logo.png" alt="logo" className="logo"></img>
+        <div className="sign">
+          <p>Sing Up</p>
+          <p>Sing In</p>
+        </div>
+      </div>
+      <main className="main">
+        <img src="./Images/image.jpg" alt="imag" className="image"></img>
+        <div className="main-text">
+          <h2>Quiz Builer And Assessment Tool</h2>
+          <p>
+            Using Quiz,it's super fast and easy to create a quiz- perfect for
+            revision guides,driving theory practice and trivia.
+          </p>
+          <button>Start Building</button>
+        </div>
+      </main>
     </div>
   );
 }
