@@ -1,3 +1,47 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: CircularStd-Book;
+}
 .quizContainer {
   display: flex;
+}
+.sidebar {
+  flex: 1;
+  border-right: 1px solid rgb(227, 225, 225);
+  height: 100vh;
+  font-size: 2rem;
+}
+.main {
+  flex: 3;
+  margin: 1rem;
+  font-size: 1.5rem;
+}
+.qustionContainer {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1rem;
+}
+.questNum {
+  background-color: #c2bcbc;
+  padding: 5%;
+  align-items: center;
+  border-radius: 50%;
+  margin: 1rem;
+  color: rgb(227, 225, 225);
+}
+.hrColor {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid rgb(227, 225, 225);
+
+  padding: 0;
+}
+.questionHeader {
+  display: flex;
+
+  justify-content: space-between;
 }

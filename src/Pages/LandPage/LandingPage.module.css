@@ -1,3 +1,9 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: CircularStd-Book;
+}
 .text {
   font-size: 4rem;
   margin-top: 5rem;
