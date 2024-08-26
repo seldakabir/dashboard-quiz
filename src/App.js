@@ -2,7 +2,7 @@ import "./App.css";
 import Header from "./Components/Header/Header";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import HomePge from "./Pages/HomePge";
-import LandingPage from "./Pages/LandingPage";
+import LandingPage from "./Pages/LandPage/LandingPage";
 
 function App() {
   return (

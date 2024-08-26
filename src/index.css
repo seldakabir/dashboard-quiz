@@ -53,6 +53,7 @@ body {
   cursor: pointer;
   background-color: var(--color-accent);
   margin-top: 10rem;
+  text-decoration: none;
 }
 .main {
   display: flex;

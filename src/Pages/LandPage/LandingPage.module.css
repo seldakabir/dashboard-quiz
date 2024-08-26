@@ -1,0 +1,35 @@
+.text {
+  font-size: 4rem;
+  margin-top: 5rem;
+  padding-bottom: 5rem;
+  text-align: center;
+}
+
+.icons {
+  width: 10rem;
+  height: 10rem;
+  text-align: center;
+}
+.box {
+  box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
+  flex: 1;
+}
+.boxContainer {
+  margin-top: 7rem;
+  display: flex;
+  gap: 5rem;
+  height: 18rem;
+}
+.boxText {
+  text-align: center;
+  font-size: 2rem;
+  margin-top: 3rem;
+}
+.iconContainer {
+  text-align: center;
+}
+.rocket {
+  width: 8rem;
+  height: 8rem;
+  margin-top: 1rem;
+}
