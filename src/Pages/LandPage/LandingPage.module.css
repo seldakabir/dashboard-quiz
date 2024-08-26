@@ -13,6 +13,7 @@
 .box {
   box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
   flex: 1;
+  cursor: pointer;
 }
 .boxContainer {
   margin-top: 7rem;
@@ -31,5 +32,19 @@
 .rocket {
   width: 8rem;
   height: 8rem;
-  margin-top: 1rem;
+  margin-top: 2rem;
+}
+.heartContainer {
+  display: flex;
+  align-items: center;
+  margin-top: 5rem;
+}
+.heartText {
+  font-size: 2.5rem;
+  font-style: normal;
+  line-height: 5rem;
+}
+.heart {
+  height: 15rem;
+  padding-right: 5rem;
 }

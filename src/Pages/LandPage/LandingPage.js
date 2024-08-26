@@ -40,6 +40,17 @@ export default function LandingPage() {
           <p className={styles.boxText}>Set Status Of Quiz To Active</p>
         </div>
       </div>
+      <div className={styles.heartContainer}>
+        <img
+          src="./images/heart.png"
+          alt="heart"
+          className={styles.heart}
+        ></img>
+        <p className={styles.heartText}>
+          Save Recourses and Money by Avoiding Print-Out Quiz Sheets and Test
+          Paper .Users Can Complete Yours Paper less Quiz via Quiz WebPage.
+        </p>
+      </div>
     </div>
   );
 }
