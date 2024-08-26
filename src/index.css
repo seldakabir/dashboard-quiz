@@ -70,6 +70,16 @@ body {
   color: var(--color-accent);
   cursor: pointer;
 }
+.link {
+  border: 0.1rem solid var(--color-accent);
+  padding: 2.5rem;
+  border-radius: 48%;
+  font-size: 2rem;
+  color: var(--color-light);
+  cursor: pointer;
+  background-color: var(--color-accent);
+  margin-top: 10rem;
+}
 .main {
   display: flex;
   margin-top: 2rem;
@@ -86,6 +96,7 @@ body {
   max-width: 50rem;
   font-size: 2.5rem;
   line-height: 3rem;
+  margin-bottom: 6rem;
 }
 .main-text > button {
   margin-top: 8rem;

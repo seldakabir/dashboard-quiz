@@ -1,21 +1,19 @@
 import "./App.css";
 import Header from "./Components/Header";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import HomePge from "./Pages/HomePge";
+import LandingPage from "./Pages/LandingPage";
 
 function App() {
   return (
     <div className="app">
       <Header />
-      <main className="main">
-        <img src="./Images/image.jpg" alt="imag" className="image"></img>
-        <div className="main-text">
-          <h2>Quiz Builer And Assessment Tool</h2>
-          <p>
-            Using Quiz,it's super fast and easy to create a quiz- perfect for
-            revision guides,driving theory practice and trivia.
-          </p>
-          <button>Start Building</button>
-        </div>
-      </main>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<HomePge />}></Route>
+          <Route path="landingPage" element={<LandingPage />}></Route>
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
