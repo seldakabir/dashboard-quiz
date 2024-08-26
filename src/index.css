@@ -44,32 +44,6 @@ body {
   padding: 3.2rem;
 }
 
-.app {
-}
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: -5rem;
-}
-.sign {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  gap: 1rem;
-}
-.sign > :first-child {
-  background-color: var(--color-accent);
-  color: var(--color-light);
-}
-.sign p {
-  border: 0.1rem solid var(--color-accent);
-  padding: 1.5rem;
-  border-radius: 48%;
-  font-size: 2rem;
-  color: var(--color-accent);
-  cursor: pointer;
-}
 .link {
   border: 0.1rem solid var(--color-accent);
   padding: 2.5rem;
