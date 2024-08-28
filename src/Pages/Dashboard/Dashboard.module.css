@@ -1,5 +1,6 @@
 h1 {
   text-align: center;
+  font-size: 5rem;
 }
 .header {
   display: flex;
@@ -21,7 +22,8 @@ button {
   padding: 3rem 1rem 3rem 4rem;
 }
 .qustionBoxContainer {
-  display: flex;
-  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
   margin-top: 2rem;
 }

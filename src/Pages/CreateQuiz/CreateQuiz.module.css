@@ -1,0 +1,29 @@
+.container {
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+  width: 80%;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 2rem;
+}
+.topics {
+  display: flex;
+  gap: 2rem;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+h2 {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+.topics input {
+  width: 10%;
+  height: 4rem;
+}
+.questionHeader {
+  display: flex;
+  font-size: 2rem;
+  justify-content: space-between;
+  padding-bottom: 2rem;
+  margin-left: 2rem;
+}
