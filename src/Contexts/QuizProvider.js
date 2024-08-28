@@ -1,4 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 const QuizContext = createContext();
 
 function QuizProvider({ children }) {
@@ -12,7 +14,6 @@ function QuizProvider({ children }) {
   const [topic2, setQuizTopic2] = useState("");
   const [topic3, setQuizTopic3] = useState("");
   const [topic4, setQuizTopic4] = useState("");
-
   useEffect(function () {
     async function fetchQuiz() {
       try {
@@ -27,7 +28,7 @@ function QuizProvider({ children }) {
     fetchQuiz();
   }, []);
 
-  function createQuizSubmit(e) {
+  function createQuizSubmit(e, navigate) {
     e.preventDefault();
     if (!description) return alert("Please enter description");
     if (!title) return alert("Please enter title");
@@ -41,14 +42,20 @@ function QuizProvider({ children }) {
       description,
       totalQuestions,
       status,
-      topic: [topic1, topic2, topic3],
+      topic: [topic1, topic2, topic3, topic4].filter(Boolean),
     };
     addQuiz(newQuiz);
     setQuizDescription("");
     setQuizTitle("");
     setQuizStatus(true);
     setQuizTotalQuestions(0);
-    setQuizTopic([]);
+    setQuizTopic1("");
+    setQuizTopic2("");
+    setQuizTopic3("");
+    setQuizTopic4("");
+    if (navigate) {
+      navigate("/EditQuiz");
+    }
   }
   function addQuiz(quiz) {
     setQuizs((quizs) => [...quizs, quiz]);

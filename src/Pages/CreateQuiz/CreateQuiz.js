@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./CreateQuiz.module.css";
-import { QuizProvider, UseQuiz } from "../../Contexts/QuizProvider";
+import { UseQuiz } from "../../Contexts/QuizProvider";
+import { useNavigate } from "react-router-dom";
 export default function CreateQuiz() {
   const {
     createQuizSubmit,
@@ -23,9 +24,13 @@ export default function CreateQuiz() {
     topic4,
     setQuizTopic4,
   } = UseQuiz();
+  const navigate = useNavigate(); // Access the navigate function
+  function handleQuizSubmit(e) {
+    createQuizSubmit(e, navigate); // Pass the navigate function to your context method
+  }
   return (
     <div className={styles.container}>
-      <form onSubmit={createQuizSubmit}>
+      <form onSubmit={handleQuizSubmit}>
         <h1> Quiz Information</h1>
         <input
           type="text"
