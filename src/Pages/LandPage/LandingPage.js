@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./LandingPage.module.css";
+import { Link } from "react-router-dom";
 export default function LandingPage() {
   return (
     <div>
@@ -19,14 +20,17 @@ export default function LandingPage() {
         </div>
 
         <div className={styles.box}>
-          <p className={styles.iconContainer}>
-            <img
-              src="./images/cube.png"
-              alt="image."
-              className={styles.icons}
-            ></img>
-          </p>
-          <p className={styles.boxText}>Add Questions to Your Quiz</p>
+          <Link to="/Dashboard">
+            {" "}
+            <p className={styles.iconContainer}>
+              <img
+                src="./images/cube.png"
+                alt="image."
+                className={styles.icons}
+              ></img>
+            </p>
+            <p className={styles.boxText}>Add Questions to Your Quiz</p>
+          </Link>
         </div>
 
         <div className={styles.box}>

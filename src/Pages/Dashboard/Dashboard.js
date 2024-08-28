@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./Dashboard.module.css";
+import QuestionBox from "../../Components/QustionBox/QuestionBox";
 export default function Dashboard() {
   return (
     <div>
@@ -10,6 +11,14 @@ export default function Dashboard() {
           <button>+Create Quiz</button>
         </div>
       </header>
+      <main>
+        <div className={styles.quizSelect}>Select a Quiz</div>
+        <div className={styles.qustionBoxContainer}>
+          <QuestionBox />
+          <QuestionBox />
+          <QuestionBox />
+        </div>
+      </main>
     </div>
   );
 }
