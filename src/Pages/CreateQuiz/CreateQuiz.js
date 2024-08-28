@@ -42,9 +42,9 @@ export default function CreateQuiz() {
         <div className={styles.select}>
           <select
             value={status}
-            onChange={(e) => setQuizStatus(e.target.value)}
+            onChange={(e) => setQuizStatus(e.target.value === "true")}
           >
-            <option>Enter status</option>
+            <option value="">Enter status</option>
             <option value={true}>Active</option>
             <option value={false}>Deactive</option>
           </select>

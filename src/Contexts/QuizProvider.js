@@ -29,8 +29,12 @@ function QuizProvider({ children }) {
 
   function createQuizSubmit(e) {
     e.preventDefault();
-    if (!description || !title || !totalQuestions)
-      return alert("please complete the information");
+    if (!description) return alert("Please enter description");
+    if (!title) return alert("Please enter title");
+    if (totalQuestions <= 0) return alert("Please enter totalQuestions");
+    if (!topic1 && !topic2 && !topic3 && !topic4)
+      return alert("Please enter atleast one topic");
+
     const newQuiz = {
       id: quizs.length + 1,
       title,
