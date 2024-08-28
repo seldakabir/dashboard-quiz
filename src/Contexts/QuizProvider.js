@@ -14,6 +14,7 @@ function QuizProvider({ children }) {
   const [topic2, setQuizTopic2] = useState("");
   const [topic3, setQuizTopic3] = useState("");
   const [topic4, setQuizTopic4] = useState("");
+  const [qustions, setQuestions] = useState([]);
   useEffect(function () {
     async function fetchQuiz() {
       try {
@@ -63,6 +64,13 @@ function QuizProvider({ children }) {
   useEffect(() => {
     console.log("Updated quizs:", quizs);
   }, [quizs]);
+  function addQuestion(question, id) {
+    quizs.find((quiz) =>
+      quiz.id === id
+        ? setQuestions((questions) => [...questions, question])
+        : quizs
+    );
+  }
 
   return (
     <QuizContext.Provider
@@ -88,6 +96,8 @@ function QuizProvider({ children }) {
         setQuizTopic3,
         topic4,
         setQuizTopic4,
+        qustions,
+        setQuestions,
       }}
     >
       {children}

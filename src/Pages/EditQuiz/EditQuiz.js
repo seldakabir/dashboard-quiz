@@ -1,6 +1,8 @@
 import React from "react";
 import styles from "./EditQuiz.module.css";
+import { UseQuiz } from "../../Contexts/QuizProvider";
 export default function EditQuiz() {
+  const { qustions } = UseQuiz();
   return (
     <div className={styles.container}>
       <hr className={styles.hrColor}></hr>
@@ -23,7 +25,7 @@ export default function EditQuiz() {
           <div className={styles.line}></div>
 
           <form>
-            <input placeholder="title"></input>
+            <input placeholder="Question"></input>
             <div className={styles.correctContainer}>
               <p>Options</p>
               <p>Correct</p>
