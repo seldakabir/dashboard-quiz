@@ -1,8 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./EditQuiz.module.css";
 import { UseQuiz } from "../../Contexts/QuizProvider";
+import { useParams } from "react-router-dom";
 export default function EditQuiz() {
-  const { qustions } = UseQuiz();
+  const [qustions, setQuestions] = useState([]);
+  const [question, setQuestion] = useState("");
+  const [options, setOptions] = useState([]);
+  const [correctOption, setCorrectOption] = useState("");
+  const [points, setPoints] = useState("");
+  const { quizs, setquizs } = UseQuiz();
+  const { quizId } = useParams();
+
+  function addQuestionSubmit(e) {
+    e.preventDefault();
+    const newQuestions = { question, options, correctOption, points };
+    addQuestion(newQuestions, quizId);
+  }
+  function addQuestion(question, quizId) {
+    setquizs(
+      quizs.map((q) =>
+        q.id === Number(quizId)
+          ? { ...q, questions: [...q.questions, question] }
+          : q
+      )
+    );
+  }
   return (
     <div className={styles.container}>
       <hr className={styles.hrColor}></hr>
@@ -19,7 +41,7 @@ export default function EditQuiz() {
         </div>
         <div className={styles.main}>
           <div className={styles.questionHeader}>
-            <p>Add Qustion</p>
+            <p>Add Qustions to X</p>
             <p className={styles.hrNum}> X/X Added</p>
           </div>
           <div className={styles.line}></div>
