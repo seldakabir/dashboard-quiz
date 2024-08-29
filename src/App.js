@@ -17,7 +17,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePge />} />
             <Route path="landingPage" element={<LandingPage />} />
-            <Route path="EditQuiz:quizId" element={<EditQuiz />} />
+            <Route path="EditQuiz/:quizId" element={<EditQuiz />} />
             <Route path="Dashboard" element={<Dashboard />} />
             <Route path="CreateQuiz" element={<CreateQuiz />} />
           </Routes>
