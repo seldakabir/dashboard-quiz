@@ -3,6 +3,7 @@ import styles from "./EditQuiz.module.css";
 import { UseQuiz } from "../../Contexts/QuizProvider";
 import { useNavigate, useParams } from "react-router-dom";
 import { Spinner } from "react-bootstrap";
+import Button from "../../Components/Button/Button";
 export default function EditQuiz() {
   const [qustions, setQuestions] = useState([]);
   const [question, setQuestion] = useState("");
@@ -177,11 +178,17 @@ export default function EditQuiz() {
             <div className={styles.buttons}>
               <button>Cancel</button>
               {questionCount >= totalQuestions ? (
-                <button type="button" onClick={handleConfirm}>
+                <Button
+                  type="button"
+                  onClick={handleConfirm}
+                  className={styles.but}
+                >
                   Confirm
-                </button>
+                </Button>
               ) : (
-                <button type="submit">Submit</button>
+                <Button type="submit" className={styles.but}>
+                  Submit
+                </Button>
               )}
             </div>
           </form>

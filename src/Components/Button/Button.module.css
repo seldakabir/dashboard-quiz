@@ -1,4 +1,3 @@
-@import "./index.css";
 .btn {
   color: inherit;
   text-transform: uppercase;
@@ -12,7 +11,7 @@
 
 .primary {
   font-weight: 700;
-  background-color: var(--color-brand--2);
+  background-color: var(--color-box);
   color: var(--color-dark--1);
 }
 

@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./CreateQuiz.module.css";
 import { UseQuiz } from "../../Contexts/QuizProvider";
 import { useNavigate } from "react-router-dom";
+import Button from "../../Components/Button/Button";
 export default function CreateQuiz() {
   const {
     createQuizSubmit,
@@ -85,7 +86,7 @@ export default function CreateQuiz() {
           </div>
         </div>
 
-        <button>Add Questions</button>
+        <Button type="primary">Add Questions</Button>
       </form>
     </div>
   );
