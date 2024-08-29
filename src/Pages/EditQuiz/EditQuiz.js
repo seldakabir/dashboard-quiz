@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./EditQuiz.module.css";
 import { UseQuiz } from "../../Contexts/QuizProvider";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 export default function EditQuiz() {
   const [qustions, setQuestions] = useState([]);
   const [question, setQuestion] = useState("");
@@ -12,18 +12,21 @@ export default function EditQuiz() {
   const [option4, setOption4] = useState("");
   const [correctOption, setCorrectOption] = useState("");
   const [points, setPoints] = useState("");
-  const { quizs, setQuizs } = UseQuiz();
+  const { quizs, setQuizs, totalQuestions } = UseQuiz();
   const { quizId } = useParams();
   const [selectedQuiz, setSelectedQuiz] = useState(null);
-
+  const [questionCount, setQuestionCount] = useState(0);
+  const navigate = useNavigate();
   useEffect(() => {
-    // Find the quiz with the matching quizId
     const quiz = quizs.find((q) => q.id === Number(quizId));
     setSelectedQuiz(quiz);
+    if (quiz) {
+      setQuestionCount(quiz.questions.length);
+    }
   }, [quizId, quizs]);
 
   if (!selectedQuiz) {
-    return <div>Loading...</div>; // Show loading or some message if quiz is not found
+    return <div>Loading...</div>;
   }
   function addQuestionSubmit(e) {
     e.preventDefault();
@@ -34,6 +37,15 @@ export default function EditQuiz() {
       points,
     };
     addQuestion(newQuestions, quizId);
+    setQuestionCount(questionCount + 1);
+
+    setQuestion("");
+    setOption1("");
+    setOption2("");
+    setOption3("");
+    setOption4("");
+    setPoints("");
+    setCorrectOption("");
   }
   function addQuestion(question, quizId) {
     setQuizs(
@@ -43,6 +55,9 @@ export default function EditQuiz() {
           : q
       )
     );
+  }
+  function handleConfirm() {
+    navigate("/dashboard");
   }
   return (
     <div className={styles.container}>
@@ -161,7 +176,13 @@ export default function EditQuiz() {
             </div>
             <div className={styles.buttons}>
               <button>Cancel</button>
-              <button>SUBMIT</button>
+              {questionCount >= totalQuestions ? (
+                <button type="button" onClick={handleConfirm}>
+                  Confirm
+                </button>
+              ) : (
+                <button type="submit">Submit</button>
+              )}
             </div>
           </form>
         </div>
