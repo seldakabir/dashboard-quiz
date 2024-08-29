@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import styles from "./EditQuiz.module.css";
 import { UseQuiz } from "../../Contexts/QuizProvider";
 import { useNavigate, useParams } from "react-router-dom";
+import { Spinner } from "react-bootstrap";
 export default function EditQuiz() {
   const [qustions, setQuestions] = useState([]);
   const [question, setQuestion] = useState("");
-  const [options, setOptions] = useState([]);
   const [option1, setOption1] = useState("");
   const [option2, setOption2] = useState("");
   const [option3, setOption3] = useState("");
@@ -26,7 +26,7 @@ export default function EditQuiz() {
   }, [quizId, quizs]);
 
   if (!selectedQuiz) {
-    return <div>Loading...</div>;
+    return <Spinner />;
   }
   function addQuestionSubmit(e) {
     e.preventDefault();
