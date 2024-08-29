@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./EditQuiz.module.css";
 import { UseQuiz } from "../../Contexts/QuizProvider";
 import { useParams } from "react-router-dom";
@@ -6,18 +6,37 @@ export default function EditQuiz() {
   const [qustions, setQuestions] = useState([]);
   const [question, setQuestion] = useState("");
   const [options, setOptions] = useState([]);
+  const [option1, setOption1] = useState("");
+  const [option2, setOption2] = useState("");
+  const [option3, setOption3] = useState("");
+  const [option4, setOption4] = useState("");
   const [correctOption, setCorrectOption] = useState("");
   const [points, setPoints] = useState("");
-  const { quizs, setquizs } = UseQuiz();
+  const { quizs, setQuizs } = UseQuiz();
   const { quizId } = useParams();
+  const [selectedQuiz, setSelectedQuiz] = useState(null);
 
+  useEffect(() => {
+    // Find the quiz with the matching quizId
+    const quiz = quizs.find((q) => q.id === Number(quizId));
+    setSelectedQuiz(quiz);
+  }, [quizId, quizs]);
+
+  if (!selectedQuiz) {
+    return <div>Loading...</div>; // Show loading or some message if quiz is not found
+  }
   function addQuestionSubmit(e) {
     e.preventDefault();
-    const newQuestions = { question, options, correctOption, points };
+    const newQuestions = {
+      question,
+      options: [option1, option2, option3, option4],
+      correctOption,
+      points,
+    };
     addQuestion(newQuestions, quizId);
   }
   function addQuestion(question, quizId) {
-    setquizs(
+    setQuizs(
       quizs.map((q) =>
         q.id === Number(quizId)
           ? { ...q, questions: [...q.questions, question] }
@@ -41,35 +60,95 @@ export default function EditQuiz() {
         </div>
         <div className={styles.main}>
           <div className={styles.questionHeader}>
-            <p>Add Qustions to X</p>
+            <p>Add Qustions to {selectedQuiz.title}</p>
             <p className={styles.hrNum}> X/X Added</p>
           </div>
           <div className={styles.line}></div>
 
-          <form>
-            <input placeholder="Question"></input>
+          <form onSubmit={addQuestionSubmit}>
+            <input
+              placeholder="Question"
+              value={question}
+              onChange={(e) => setQuestion(e.target.value)}
+            ></input>
             <div className={styles.correctContainer}>
               <p>Options</p>
               <p>Correct</p>
             </div>
             <div className={styles.optionContainer}>
-              <input placeholder="option 1" className={styles.options}></input>
-              <input type="radio" value="option1" checked={true} />{" "}
+              <input
+                type="text"
+                placeholder="Option 1"
+                className={styles.options}
+                value={option1}
+                onChange={(e) => setOption1(e.target.value)}
+              ></input>
+              <input
+                type="radio"
+                name="options"
+                value="1"
+                // checked={options === "1"}
+                onChange={(e) => setCorrectOption(Number(e.target.value))}
+              />{" "}
             </div>
             <div className={styles.optionContainer}>
-              <input placeholder="option 2" className={styles.options}></input>
-              <input type="radio" value="option1" />{" "}
+              <input
+                type="text"
+                placeholder="Option 2"
+                value={option2}
+                onChange={(e) => setOption2(e.target.value)}
+                className={styles.options}
+              ></input>
+              <input
+                type="radio"
+                name="options"
+                value="2"
+                // checked={options === "2"}
+                onChange={(e) => setCorrectOption(Number(e.target.value))}
+              />{" "}
             </div>
             <div className={styles.optionContainer}>
-              <input placeholder="option 3" className={styles.options}></input>
-              <input type="radio" value="option1" />{" "}
+              <input
+                placeholder="option 3"
+                type="text"
+                value={option3}
+                onChange={(e) => setOption3(e.target.value)}
+                className={styles.options}
+              ></input>
+              <input
+                type="radio"
+                name="options"
+                value="3"
+                // checked={options === "3"}
+                onChange={(e) => setCorrectOption(Number(e.target.value))}
+              />{" "}
             </div>
             <div className={styles.optionContainer}>
-              <input placeholder="option 4" className={styles.options}></input>
-              <input type="radio" value="option1" />{" "}
+              <input
+                placeholder="option 4"
+                type="text"
+                value={option4}
+                onChange={(e) => setOption4(e.target.value)}
+                className={styles.options}
+              ></input>
+              <input
+                type="radio"
+                name="options"
+                value="4"
+                // checked={options === "4"}
+                onChange={(e) => setCorrectOption(Number(e.target.value))}
+              />{" "}
             </div>
-            <div>
-              <div>
+
+            <div className={styles.footer}>
+              <input
+                placeholder="Point"
+                type="text"
+                value={points}
+                onChange={(e) => setPoints(Number(e.target.value))}
+                className={styles.points}
+              ></input>
+              <div className={styles.star}>
                 *Marking a correct option is only allowed after you have already{" "}
                 written all options.
               </div>
