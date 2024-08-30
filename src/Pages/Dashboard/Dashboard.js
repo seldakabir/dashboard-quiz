@@ -16,7 +16,12 @@ export default function Dashboard() {
     console.log(selected);
     console.log(selected.title);
   }
-
+  function handleDeleteQuiz(id) {
+    quizDelete(id);
+    if (selectedQuiz?.id === id) {
+      setSelectedQuiz("");
+    }
+  }
   return (
     <div>
       <header>
@@ -36,7 +41,7 @@ export default function Dashboard() {
               <div>Select a Quiz:{selectedQuiz ? selectedQuiz.title : ""}</div>{" "}
               <div className={styles.delete}>
                 {" "}
-                <p onClick={() => quizDelete(selected.id)}>DELETE</p>
+                <p onClick={() => handleDeleteQuiz(selected.id)}>DELETE</p>
                 <p className={styles.edit}>Edit Questions</p>{" "}
               </div>
             </div>

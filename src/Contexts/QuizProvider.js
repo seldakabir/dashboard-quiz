@@ -57,7 +57,7 @@ function QuizProvider({ children }) {
     setQuizTopic3("");
     setQuizTopic4("");
     if (navigate) {
-      navigate(`/EditQuiz/${newQuiz.id}`);
+      navigate(`/EditQuiz/${newQuiz.id}/${newQuiz.totalQuestions}`);
     }
   }
   function addQuiz(quiz) {

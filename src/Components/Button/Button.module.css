@@ -13,6 +13,7 @@
   font-weight: 700;
   background-color: var(--color-box);
   color: var(--color-dark--1);
+  width: 20rem;
 }
 
 .back {

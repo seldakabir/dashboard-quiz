@@ -2,7 +2,7 @@
   "quizs": [
     {
       "id": 1,
-      "title": "Check your javaScript knowledge",
+      "title": "Check  javaScript knowledge",
       "Description": "this quiz is about your js skills",
       "status": "Active",
       "totalQuestions": 20,

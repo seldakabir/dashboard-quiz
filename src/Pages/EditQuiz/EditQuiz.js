@@ -17,18 +17,21 @@ export default function EditQuiz() {
   const { quizId } = useParams();
   const [selectedQuiz, setSelectedQuiz] = useState(null);
   const [questionCount, setQuestionCount] = useState(0);
+  const [quizTotalQuestions, setQuizTotalQuestions] = useState("");
   const navigate = useNavigate();
   useEffect(() => {
     const quiz = quizs.find((q) => q.id === Number(quizId));
     setSelectedQuiz(quiz);
     if (quiz) {
       setQuestionCount(quiz.questions.length);
+      setQuizTotalQuestions(quiz.totalQuestions);
     }
   }, [quizId, quizs]);
 
   if (!selectedQuiz) {
     return <Spinner />;
   }
+  console.log(totalQuestions);
   function addQuestionSubmit(e) {
     e.preventDefault();
     const newQuestions = {
@@ -77,7 +80,10 @@ export default function EditQuiz() {
         <div className={styles.main}>
           <div className={styles.questionHeader}>
             <p>Add Qustions to {selectedQuiz.title}</p>
-            <p className={styles.hrNum}> X/X Added</p>
+            <p className={styles.hrNum}>
+              {" "}
+              {questionCount}/{quizTotalQuestions} Added
+            </p>
           </div>
           <div className={styles.line}></div>
 

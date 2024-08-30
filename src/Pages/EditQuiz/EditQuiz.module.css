@@ -106,10 +106,7 @@ input[type="radio"] {
   justify-content: end;
   gap: 3rem;
 }
-button {
-  width: 8rem;
-  height: 4rem;
-}
+
 .points {
   width: 20%;
   height: 6rem;
@@ -139,4 +136,5 @@ button {
   cursor: pointer;
   font-weight: 700;
   background-color: var(--color-box);
+  width: 25rem;
 }
