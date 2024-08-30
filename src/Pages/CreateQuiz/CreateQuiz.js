@@ -58,7 +58,11 @@ export default function CreateQuiz() {
             type="number"
             placeholder="Enter Total Questions"
             value={totalQuestions}
-            onChange={(e) => setQuizTotalQuestions(Number(e.target.value))}
+            onChange={(e) => {
+              e.target.value < 0
+                ? (e.target.value = 0)
+                : setQuizTotalQuestions(Number(e.target.value));
+            }}
           ></input>
           <div className={styles.topics}>
             <h2>Enter Topics:</h2>
