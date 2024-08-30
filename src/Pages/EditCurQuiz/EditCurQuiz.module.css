@@ -1,0 +1,142 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: CircularStd-Book;
+}
+.container {
+  margin-top: -1rem;
+}
+.quizContainer {
+  display: flex;
+}
+.sidebar {
+  flex: 1;
+  border-right: 1px solid rgb(227, 225, 225);
+  height: 100vh;
+  font-size: 2rem;
+}
+.main {
+  flex: 3;
+  margin: 1rem;
+  font-size: 1.5rem;
+}
+.qustionContainer {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1rem;
+}
+.questNum {
+  background-color: #c2bcbc;
+  padding: 5%;
+  align-items: center;
+  border-radius: 50%;
+  margin: 1rem;
+  color: rgb(227, 225, 225);
+}
+.hrColor {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid rgb(227, 225, 225);
+
+  padding: 0;
+}
+.questionHeader {
+  display: flex;
+  font-size: 2rem;
+  justify-content: space-between;
+  padding-bottom: 2rem;
+  margin-left: 2rem;
+}
+.line {
+  border-bottom: 1px solid rgb(227, 225, 225);
+  width: 102%;
+  margin: -10px;
+}
+.hrNum {
+  border-bottom: 3px solid var(--color-accent);
+  text-align: center;
+  width: 25%;
+}
+form {
+  padding-top: 2rem;
+}
+form > input {
+  width: 98%;
+  height: 6rem;
+  border-radius: 0.7rem;
+  border: 1px solid rgb(227, 225, 225);
+  padding-left: 1rem;
+  font-size: 2rem;
+  margin-left: 2rem;
+  margin-top: 2rem;
+}
+.correctContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 3rem;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  margin-left: 2.1rem;
+}
+input[type="radio"] {
+  width: 3rem;
+}
+.options {
+  width: 90%;
+  height: 6rem;
+  border-radius: 0.7rem;
+  border: 1px solid rgb(227, 225, 225);
+  padding-left: 1rem;
+  font-size: 2rem;
+}
+.optionContainer {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 3rem;
+}
+.note {
+  margin-top: 1rem;
+}
+.buttons {
+  display: flex;
+  justify-content: end;
+  gap: 3rem;
+}
+button {
+  width: 8rem;
+  height: 4rem;
+}
+.points {
+  width: 20%;
+  height: 6rem;
+  border-radius: 0.7rem;
+  border: 1px solid rgb(227, 225, 225);
+  padding-left: 1rem;
+  font-size: 2rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+.footer {
+  display: flex;
+
+  flex-direction: column;
+}
+.star {
+  margin-top: 3rem;
+}
+.but {
+  color: inherit;
+  text-transform: uppercase;
+  padding: 0.8rem 1.6rem;
+  font-family: inherit;
+  font-size: 1.5rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 700;
+  background-color: var(--color-box);
+}

@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Message from "../Components/Message/Message";
 
 const QuizContext = createContext();
 
@@ -66,7 +67,15 @@ function QuizProvider({ children }) {
     console.log("Updated quizs:", quizs);
   }, [quizs]);
   function quizDelete(id) {
-    setQuizs((quizs) => quizs.filter((quiz) => quiz.id !== id));
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this quiz?"
+    );
+    if (confirmed) {
+      const updatedQuizzes = quizs.filter((q) => q.id !== id);
+
+      setQuizs(updatedQuizzes);
+      alert("Quiz deleted successfully!");
+    }
   }
   return (
     <QuizContext.Provider

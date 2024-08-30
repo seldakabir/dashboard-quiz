@@ -39,6 +39,7 @@ button {
 .delete {
   display: flex;
   gap: 3rem;
+  cursor: pointer;
 }
 .edit {
   color: var(--color-light);

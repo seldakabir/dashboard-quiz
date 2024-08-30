@@ -7,6 +7,7 @@ import EditQuiz from "./Pages/EditQuiz/EditQuiz";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import { QuizProvider } from "./Contexts/QuizProvider";
 import CreateQuiz from "./Pages/CreateQuiz/CreateQuiz";
+import EditCurQuiz from "./Pages/EditCurQuiz/EditCurQuiz";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route path="EditQuiz/:quizId" element={<EditQuiz />} />
             <Route path="Dashboard" element={<Dashboard />} />
             <Route path="CreateQuiz" element={<CreateQuiz />} />
+            <Route path="EditCurQuiz" element={<EditCurQuiz />} />
           </Routes>
         </BrowserRouter>
       </QuizProvider>
