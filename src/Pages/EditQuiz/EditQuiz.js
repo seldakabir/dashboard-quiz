@@ -34,6 +34,12 @@ export default function EditQuiz() {
   console.log(totalQuestions);
   function addQuestionSubmit(e) {
     e.preventDefault();
+    if (!question) return alert("Please enter question");
+    if (!option1 && !option2 && !option3 && !option4)
+      return alert("Please enter option");
+
+    if (!points) return alert("Please enter point");
+    if (!correctOption) return alert("Please enter a correcctOption");
     const newQuestions = {
       question,
       options: [option1, option2, option3, option4],
@@ -68,13 +74,13 @@ export default function EditQuiz() {
       <hr className={styles.hrColor}></hr>
       <div className={styles.quizContainer}>
         <div className={styles.sidebar}>
-          <div className={styles.qustionContainer}>
-            <p className={styles.questNum}>1</p>
-            <p>Qustion Text</p>
-          </div>
-          <div className={styles.qustionContainer}>
-            <p className={styles.questNum}>1</p>
-            <p>Qustion Text</p>
+          <div>
+            {selectedQuiz.questions.map((question, index) => (
+              <div key={index} className={styles.qustionContainer}>
+                <p className={styles.questNum}>{index + 1}</p>
+                <p>{question.question}</p>
+              </div>
+            ))}
           </div>
         </div>
         <div className={styles.main}>
