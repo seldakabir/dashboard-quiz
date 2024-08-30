@@ -65,7 +65,9 @@ function QuizProvider({ children }) {
   useEffect(() => {
     console.log("Updated quizs:", quizs);
   }, [quizs]);
-
+  function quizDelete(id) {
+    setQuizs((quizs) => quizs.filter((quiz) => quiz.id !== id));
+  }
   return (
     <QuizContext.Provider
       value={{
@@ -90,6 +92,7 @@ function QuizProvider({ children }) {
         setQuizTopic3,
         topic4,
         setQuizTopic4,
+        quizDelete,
       }}
     >
       {children}

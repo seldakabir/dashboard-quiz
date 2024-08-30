@@ -8,6 +8,7 @@ h1 {
   align-items: center;
   margin-top: 5rem;
   font-size: 2rem;
+  margin-bottom: 2rem;
 }
 button {
   width: 20%;
@@ -15,15 +16,30 @@ button {
 }
 .quizSelect {
   background-color: var(--color-box);
-  margin-top: 2rem;
   font-size: 2.5rem;
   text-align: left;
   border-radius: 0.5rem;
-  padding: 3rem 1rem 3rem 4rem;
+  padding: 1.5rem 1rem 1.5rem 1rem;
+  /* margin-top: 2rem; */
+  display: flex;
+  gap: 50rem;
 }
 .qustionBoxContainer {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 
   margin-top: 2rem;
+}
+.update {
+  display: flex;
+  justify-content: end;
+  gap: 3rem;
+  width: 35rem;
+}
+.delete {
+  display: flex;
+  gap: 3rem;
+}
+.edit {
+  color: var(--color-light);
 }

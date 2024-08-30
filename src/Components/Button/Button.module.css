@@ -17,8 +17,10 @@
 
 .back {
   font-weight: 600;
-  background: none;
+  background: var(--color-accent);
   border: 1px solid currentColor;
+  width: 16rem;
+  color: #fff;
 }
 
 .position {
