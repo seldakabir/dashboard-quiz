@@ -34,6 +34,10 @@ export default function EditQuiz() {
   console.log(totalQuestions);
   function addQuestionSubmit(e) {
     e.preventDefault();
+    if (questionCount >= quizTotalQuestions) {
+      alert(`You cannot add more than ${quizTotalQuestions} questions.`);
+      return;
+    }
     if (!question) return alert("Please enter question");
     if (!option1 && !option2 && !option3 && !option4)
       return alert("Please enter option");
@@ -46,6 +50,11 @@ export default function EditQuiz() {
       correctOption,
       points,
     };
+    if (questionCount >= quizTotalQuestions) {
+      navigate("/dashboard");
+      console.log(quizTotalQuestions);
+    }
+
     addQuestion(newQuestions, quizId);
     setQuestionCount(questionCount + 1);
 
@@ -189,18 +198,14 @@ export default function EditQuiz() {
             </div>
             <div className={styles.buttons}>
               <button>Cancel</button>
-              {questionCount >= totalQuestions ? (
-                <Button
-                  type="button"
-                  onClick={handleConfirm}
-                  className={styles.but}
-                >
-                  Confirm
-                </Button>
+              {questionCount < quizTotalQuestions - 1 ? (
+                <button className={styles.but} type="submit">
+                  Next Question
+                </button>
               ) : (
-                <Button type="submit" className={styles.but}>
-                  Submit
-                </Button>
+                <button onClick={handleConfirm} className={styles.but}>
+                  confrim
+                </button>
               )}
             </div>
           </form>

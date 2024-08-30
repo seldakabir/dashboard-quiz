@@ -56,6 +56,7 @@ function QuizProvider({ children }) {
     setQuizTopic2("");
     setQuizTopic3("");
     setQuizTopic4("");
+
     if (navigate) {
       navigate(`/EditQuiz/${newQuiz.id}/${newQuiz.totalQuestions}`);
     }
