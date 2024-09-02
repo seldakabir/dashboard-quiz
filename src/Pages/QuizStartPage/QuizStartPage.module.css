@@ -1,0 +1,54 @@
+.container {
+  display: flex;
+}
+.sidebar {
+  flex: 1;
+  background-color: #f1ecec;
+  padding-right: 1rem;
+  border-radius: 4rem;
+  text-align: center;
+  padding: 0.5rem;
+  padding-top: 1rem;
+  margin-right: 5rem;
+}
+.number {
+  width: 3rem;
+  padding: 0.5rem;
+  background-color: #dd7a7a;
+  border-radius: 50%;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+.main {
+  flex: 20;
+
+  border-radius: 2rem;
+  padding: 4rem;
+}
+.header {
+  display: flex;
+  gap: 43rem;
+  font-size: 2rem;
+  background-color: #f1ecec;
+  border-radius: 2rem;
+  padding: 2rem;
+}
+.options {
+  margin-bottom: 1rem;
+  padding: 2rem;
+  border-radius: 0.3rem;
+}
+.buttons {
+  display: flex;
+  justify-content: space-between;
+}
+.question {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  padding-left: 2rem;
+  padding-bottom: 1rem;
+}
+button {
+  width: 20rem;
+}

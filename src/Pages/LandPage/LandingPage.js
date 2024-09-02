@@ -9,14 +9,16 @@ export default function LandingPage() {
       </p>
       <div className={styles.boxContainer}>
         <div className={styles.box}>
-          <p className={styles.iconContainer}>
-            <img
-              src="./images/hummer.jpg"
-              alt="image."
-              className={styles.icons}
-            ></img>
-          </p>
-          <p className={styles.boxText}>Create a Quiz</p>
+          <Link to="/QuizStart">
+            <p className={styles.iconContainer}>
+              <img
+                src="./images/hummer.jpg"
+                alt="image."
+                className={styles.icons}
+              ></img>
+            </p>
+            <p className={styles.boxText}>Start a Quiz</p>
+          </Link>
         </div>
 
         <div className={styles.box}>
