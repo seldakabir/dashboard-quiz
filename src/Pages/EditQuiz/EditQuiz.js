@@ -76,6 +76,16 @@ export default function EditQuiz() {
     );
   }
   function handleConfirm() {
+    if (questionCount >= quizTotalQuestions) {
+      alert(`You cannot add more than ${quizTotalQuestions} questions.`);
+      return;
+    }
+    if (!question) return alert("Please enter question");
+    if (!option1 && !option2 && !option3 && !option4)
+      return alert("Please enter option");
+
+    if (!points) return alert("Please enter point");
+    if (!correctOption) return alert("Please enter a correcctOption");
     navigate("/dashboard");
   }
   return (

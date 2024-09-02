@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import styles from "./Dashboard.module.css";
 import Quiz from "../../Components/Quiz/Quiz";
 import { UseQuiz } from "../../Contexts/QuizProvider";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "../../Components/Button/Button";
 export default function Dashboard() {
   const { quizs, quizDelete } = UseQuiz();
   const [selectedQuiz, setSelectedQuiz] = useState("");
   const quiz = {};
-
+  const navigateEdit = useNavigate();
   let selected = {};
   function getSelectedQuiz(id) {
     selected = quizs.find((q) => q.id === Number(id));
@@ -20,6 +20,14 @@ export default function Dashboard() {
     quizDelete(id);
     if (selectedQuiz?.id === id) {
       setSelectedQuiz("");
+    }
+  }
+
+  function navigateToEdit() {
+    if (navigateEdit) {
+      navigateEdit(
+        `/EditCurQuiz/${selectedQuiz.id}/${selectedQuiz.totalQuestions}`
+      );
     }
   }
   return (
@@ -38,11 +46,20 @@ export default function Dashboard() {
         <div className={styles.quizSelect}>
           {selectedQuiz ? (
             <div className={styles.quizSelect}>
-              <div>Select a Quiz:{selectedQuiz ? selectedQuiz.title : ""}</div>{" "}
+              <div className={styles.flex}>
+                Select a Quiz:{selectedQuiz ? selectedQuiz.title : ""}
+              </div>{" "}
               <div className={styles.delete}>
                 {" "}
                 <p onClick={() => handleDeleteQuiz(selected.id)}>DELETE</p>
-                <p className={styles.edit}>Edit Questions</p>{" "}
+                <p
+                  className={styles.edit}
+                  onClick={() =>
+                    navigateToEdit(selected.id, selected.totalQuestions)
+                  }
+                >
+                  Edit Questions
+                </p>{" "}
               </div>
             </div>
           ) : (

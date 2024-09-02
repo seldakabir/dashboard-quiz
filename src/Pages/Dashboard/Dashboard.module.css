@@ -23,6 +23,7 @@ button {
   /* margin-top: 2rem; */
   display: flex;
   gap: 56rem;
+  flex: 2;
 }
 .qustionBoxContainer {
   display: grid;
@@ -43,4 +44,9 @@ button {
 }
 .edit {
   color: var(--color-light);
+  text-decoration: none;
+  border: none;
+}
+.flex {
+  flex: 3;
 }

@@ -139,4 +139,5 @@ button {
   cursor: pointer;
   font-weight: 700;
   background-color: var(--color-box);
+  width: 30rem;
 }

@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Spinner } from "react-bootstrap";
 import Button from "../../Components/Button/Button";
 export default function EditQuiz() {
+  const [qustions, setQuestions] = useState([]);
   const [question, setQuestion] = useState("");
   const [option1, setOption1] = useState("");
   const [option2, setOption2] = useState("");
@@ -16,26 +17,45 @@ export default function EditQuiz() {
   const { quizId } = useParams();
   const [selectedQuiz, setSelectedQuiz] = useState(null);
   const [questionCount, setQuestionCount] = useState(0);
+  const [quizTotalQuestions, setQuizTotalQuestions] = useState("");
   const navigate = useNavigate();
+  const quizQuestions = {};
   useEffect(() => {
     const quiz = quizs.find((q) => q.id === Number(quizId));
     setSelectedQuiz(quiz);
     if (quiz) {
       setQuestionCount(quiz.questions.length);
+      setQuizTotalQuestions(quiz.totalQuestions);
     }
   }, [quizId, quizs]);
 
   if (!selectedQuiz) {
     return <Spinner />;
   }
+  console.log(totalQuestions);
   function addQuestionSubmit(e) {
     e.preventDefault();
+    if (questionCount >= quizTotalQuestions) {
+      alert(`You cannot add more than ${quizTotalQuestions} questions.`);
+      return;
+    }
+    if (!question) return alert("Please enter question");
+    if (!option1 && !option2 && !option3 && !option4)
+      return alert("Please enter option");
+
+    if (!points) return alert("Please enter point");
+    if (!correctOption) return alert("Please enter a correcctOption");
     const newQuestions = {
       question,
       options: [option1, option2, option3, option4],
       correctOption,
       points,
     };
+    if (questionCount >= quizTotalQuestions) {
+      navigate("/dashboard");
+      console.log(quizTotalQuestions);
+    }
+
     addQuestion(newQuestions, quizId);
     setQuestionCount(questionCount + 1);
 
@@ -57,26 +77,62 @@ export default function EditQuiz() {
     );
   }
   function handleConfirm() {
+    if (questionCount >= quizTotalQuestions) {
+      alert(`You cannot add more than ${quizTotalQuestions} questions.`);
+      return;
+    }
+    if (!question) return alert("Please enter question");
+    if (!option1 && !option2 && !option3 && !option4)
+      return alert("Please enter option");
+
+    if (!points) return alert("Please enter point");
+    if (!correctOption) return alert("Please enter a correcctOption");
     navigate("/dashboard");
+  }
+  function selectedQuestion(index) {
+    if (
+      !selectedQuiz ||
+      !selectedQuiz.questions ||
+      index >= selectedQuiz.questions.length
+    ) {
+      console.error("Invalid question index or selectedQuiz is undefined.");
+      return;
+    }
+    const selected = quizs.find((q) => q.id === Number(quizId));
+    setQuestion(selected.questions[index].question);
+    setOption1(selected.questions[index].options[0]);
+    setOption2(selected.questions[index].options[1]);
+    setOption3(selected.questions[index].options[2]);
+    setOption4(selected.questions[index].options[3]);
+    setPoints(selected.questions[index].points);
+    setCorrectOption(selected.questions[index].correctOption);
+    console.log(selected);
   }
   return (
     <div className={styles.container}>
       <hr className={styles.hrColor}></hr>
       <div className={styles.quizContainer}>
         <div className={styles.sidebar}>
-          <div className={styles.qustionContainer}>
-            <p className={styles.questNum}>1</p>
-            <p>Qustion Text</p>
-          </div>
-          <div className={styles.qustionContainer}>
-            <p className={styles.questNum}>1</p>
-            <p>Qustion Text</p>
+          <div>
+            {selectedQuiz.questions.map((question, index) => (
+              <div
+                key={index}
+                className={styles.qustionContainer}
+                onClick={() => selectedQuestion(index)}
+              >
+                <p className={styles.questNum}>{index + 1}</p>
+                <p>{question.question}</p>
+              </div>
+            ))}
           </div>
         </div>
         <div className={styles.main}>
           <div className={styles.questionHeader}>
-            <p>Add Qustions to {selectedQuiz.title}</p>
-            <p className={styles.hrNum}> X/X Added</p>
+            <p>Edit Qustions of {selectedQuiz.title}</p>
+            <p className={styles.hrNum}>
+              {" "}
+              {questionCount}/{quizTotalQuestions} Added
+            </p>
           </div>
           <div className={styles.line}></div>
 
@@ -102,7 +158,7 @@ export default function EditQuiz() {
                 type="radio"
                 name="options"
                 value="1"
-                // checked={options === "1"}
+                checked={correctOption === 1}
                 onChange={(e) => setCorrectOption(Number(e.target.value))}
               />{" "}
             </div>
@@ -118,7 +174,7 @@ export default function EditQuiz() {
                 type="radio"
                 name="options"
                 value="2"
-                // checked={options === "2"}
+                checked={correctOption === 2}
                 onChange={(e) => setCorrectOption(Number(e.target.value))}
               />{" "}
             </div>
@@ -134,7 +190,7 @@ export default function EditQuiz() {
                 type="radio"
                 name="options"
                 value="3"
-                // checked={options === "3"}
+                checked={correctOption === 3}
                 onChange={(e) => setCorrectOption(Number(e.target.value))}
               />{" "}
             </div>
@@ -150,7 +206,7 @@ export default function EditQuiz() {
                 type="radio"
                 name="options"
                 value="4"
-                // checked={options === "4"}
+                checked={correctOption === 4}
                 onChange={(e) => setCorrectOption(Number(e.target.value))}
               />{" "}
             </div>
@@ -176,18 +232,14 @@ export default function EditQuiz() {
             </div>
             <div className={styles.buttons}>
               <button>Cancel</button>
-              {questionCount >= totalQuestions ? (
-                <Button
-                  type="button"
-                  onClick={handleConfirm}
-                  className={styles.but}
-                >
-                  Confirm
-                </Button>
+              {questionCount < quizTotalQuestions - 1 ? (
+                <button className={styles.but} type="submit">
+                  Edit Question
+                </button>
               ) : (
-                <Button type="submit" className={styles.but}>
-                  Submit
-                </Button>
+                <button onClick={handleConfirm} className={styles.but}>
+                  confrim
+                </button>
               )}
             </div>
           </form>

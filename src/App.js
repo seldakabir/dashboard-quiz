@@ -24,7 +24,10 @@ function App() {
             />
             <Route path="Dashboard" element={<Dashboard />} />
             <Route path="CreateQuiz" element={<CreateQuiz />} />
-            <Route path="EditCurQuiz" element={<EditCurQuiz />} />
+            <Route
+              path="EditCurQuiz/:quizId/:questionCount"
+              element={<EditCurQuiz />}
+            />
           </Routes>
         </BrowserRouter>
       </QuizProvider>
