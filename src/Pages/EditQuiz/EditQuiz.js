@@ -3,9 +3,7 @@ import styles from "./EditQuiz.module.css";
 import { UseQuiz } from "../../Contexts/QuizProvider";
 import { useNavigate, useParams } from "react-router-dom";
 import { Spinner } from "react-bootstrap";
-import Button from "../../Components/Button/Button";
 export default function EditQuiz() {
-  const [qustions, setQuestions] = useState([]);
   const [question, setQuestion] = useState("");
   const [option1, setOption1] = useState("");
   const [option2, setOption2] = useState("");
@@ -25,19 +23,18 @@ export default function EditQuiz() {
     if (quiz) {
       setQuestionCount(quiz.questions.length);
       setQuizTotalQuestions(quiz.totalQuestions);
+      console.log(quiz);
+      console.log(`"total"${quizTotalQuestions}`);
+      console.log(`"count"${questionCount}`);
     }
   }, [quizId, quizs]);
 
   if (!selectedQuiz) {
     return <Spinner />;
   }
-  console.log(totalQuestions);
   function addQuestionSubmit(e) {
     e.preventDefault();
-    if (questionCount >= quizTotalQuestions) {
-      alert(`You cannot add more than ${quizTotalQuestions} questions.`);
-      return;
-    }
+
     if (!question) return alert("Please enter question");
     if (!option1 && !option2 && !option3 && !option4)
       return alert("Please enter option");
@@ -50,13 +47,15 @@ export default function EditQuiz() {
       correctOption,
       points,
     };
-    if (questionCount >= quizTotalQuestions) {
+    addQuestion(newQuestions, quizId);
+    setQuestionCount((prevCount) => prevCount + 1);
+    console.log(`"total"${quizTotalQuestions}`);
+    console.log(`"count"${questionCount}`);
+    if (questionCount + 1 >= quizTotalQuestions) {
       navigate("/dashboard");
       console.log(quizTotalQuestions);
+      return;
     }
-
-    addQuestion(newQuestions, quizId);
-    setQuestionCount(questionCount + 1);
 
     setQuestion("");
     setOption1("");
@@ -213,9 +212,7 @@ export default function EditQuiz() {
                   Next Question
                 </button>
               ) : (
-                <button onClick={handleConfirm} className={styles.but}>
-                  confrim
-                </button>
+                <button className={styles.but}>confrim</button>
               )}
             </div>
           </form>

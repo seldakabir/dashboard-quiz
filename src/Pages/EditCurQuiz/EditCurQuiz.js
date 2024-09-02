@@ -3,9 +3,7 @@ import styles from "./EditCurQuiz.module.css";
 import { UseQuiz } from "../../Contexts/QuizProvider";
 import { useNavigate, useParams } from "react-router-dom";
 import { Spinner } from "react-bootstrap";
-import Button from "../../Components/Button/Button";
 export default function EditQuiz() {
-  const [qustions, setQuestions] = useState([]);
   const [question, setQuestion] = useState("");
   const [option1, setOption1] = useState("");
   const [option2, setOption2] = useState("");
@@ -13,13 +11,15 @@ export default function EditQuiz() {
   const [option4, setOption4] = useState("");
   const [correctOption, setCorrectOption] = useState("");
   const [points, setPoints] = useState("");
-  const { quizs, setQuizs, totalQuestions } = UseQuiz();
+  const { quizs, setQuizs } = UseQuiz();
   const { quizId } = useParams();
   const [selectedQuiz, setSelectedQuiz] = useState(null);
   const [questionCount, setQuestionCount] = useState(0);
   const [quizTotalQuestions, setQuizTotalQuestions] = useState("");
+  const [selectedQuestionIndex, setSelectedQuestionIndex] = useState(null);
+
   const navigate = useNavigate();
-  const quizQuestions = {};
+
   useEffect(() => {
     const quiz = quizs.find((q) => q.id === Number(quizId));
     setSelectedQuiz(quiz);
@@ -32,63 +32,7 @@ export default function EditQuiz() {
   if (!selectedQuiz) {
     return <Spinner />;
   }
-  console.log(totalQuestions);
-  function addQuestionSubmit(e) {
-    e.preventDefault();
-    if (questionCount >= quizTotalQuestions) {
-      alert(`You cannot add more than ${quizTotalQuestions} questions.`);
-      return;
-    }
-    if (!question) return alert("Please enter question");
-    if (!option1 && !option2 && !option3 && !option4)
-      return alert("Please enter option");
 
-    if (!points) return alert("Please enter point");
-    if (!correctOption) return alert("Please enter a correcctOption");
-    const newQuestions = {
-      question,
-      options: [option1, option2, option3, option4],
-      correctOption,
-      points,
-    };
-    if (questionCount >= quizTotalQuestions) {
-      navigate("/dashboard");
-      console.log(quizTotalQuestions);
-    }
-
-    addQuestion(newQuestions, quizId);
-    setQuestionCount(questionCount + 1);
-
-    setQuestion("");
-    setOption1("");
-    setOption2("");
-    setOption3("");
-    setOption4("");
-    setPoints("");
-    setCorrectOption("");
-  }
-  function addQuestion(question, quizId) {
-    setQuizs(
-      quizs.map((q) =>
-        q.id === Number(quizId)
-          ? { ...q, questions: [...q.questions, question] }
-          : q
-      )
-    );
-  }
-  function handleConfirm() {
-    if (questionCount >= quizTotalQuestions) {
-      alert(`You cannot add more than ${quizTotalQuestions} questions.`);
-      return;
-    }
-    if (!question) return alert("Please enter question");
-    if (!option1 && !option2 && !option3 && !option4)
-      return alert("Please enter option");
-
-    if (!points) return alert("Please enter point");
-    if (!correctOption) return alert("Please enter a correcctOption");
-    navigate("/dashboard");
-  }
   function selectedQuestion(index) {
     if (
       !selectedQuiz ||
@@ -98,6 +42,7 @@ export default function EditQuiz() {
       console.error("Invalid question index or selectedQuiz is undefined.");
       return;
     }
+    setSelectedQuestionIndex(index);
     const selected = quizs.find((q) => q.id === Number(quizId));
     setQuestion(selected.questions[index].question);
     setOption1(selected.questions[index].options[0]);
@@ -108,6 +53,30 @@ export default function EditQuiz() {
     setCorrectOption(selected.questions[index].correctOption);
     console.log(selected);
   }
+  function submitCorrectQuestions() {
+    const updatedQuizs = quizs.map((quiz) => {
+      if (quiz.id === Number(quizId)) {
+        const updatedQuestions = quiz.questions.map((q, index) => {
+          if (index === selectedQuestionIndex) {
+            return {
+              question,
+              options: [option1, option2, option3, option4],
+              correctOption,
+              points,
+            };
+          }
+          return q;
+        });
+
+        return { ...quiz, questions: updatedQuestions };
+      }
+      return quiz;
+    });
+    setQuizs(updatedQuizs);
+    navigate("/dashboard");
+    console.log("Questions updated successfully");
+  }
+  console.log(selectedQuiz);
   return (
     <div className={styles.container}>
       <hr className={styles.hrColor}></hr>
@@ -120,7 +89,7 @@ export default function EditQuiz() {
                 className={styles.qustionContainer}
                 onClick={() => selectedQuestion(index)}
               >
-                <p className={styles.questNum}>{index + 1}</p>
+                <p className={styles.questNum}>{index}</p>
                 <p>{question.question}</p>
               </div>
             ))}
@@ -136,7 +105,7 @@ export default function EditQuiz() {
           </div>
           <div className={styles.line}></div>
 
-          <form onSubmit={addQuestionSubmit}>
+          <form onSubmit={submitCorrectQuestions}>
             <input
               placeholder="Question"
               value={question}
@@ -232,15 +201,10 @@ export default function EditQuiz() {
             </div>
             <div className={styles.buttons}>
               <button>Cancel</button>
-              {questionCount < quizTotalQuestions - 1 ? (
-                <button className={styles.but} type="submit">
-                  Edit Question
-                </button>
-              ) : (
-                <button onClick={handleConfirm} className={styles.but}>
-                  confrim
-                </button>
-              )}
+
+              <button className={styles.but} type="submit">
+                Edit Question
+              </button>
             </div>
           </form>
         </div>
