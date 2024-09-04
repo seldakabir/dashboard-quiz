@@ -1,0 +1,52 @@
+h1 {
+  text-align: center;
+  font-size: 5rem;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 5rem;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+button {
+  width: 20%;
+  font-size: 1.5rem;
+}
+.quizSelect {
+  background-color: var(--color-box);
+  font-size: 2.5rem;
+  text-align: left;
+  border-radius: 0.5rem;
+  padding: 1.5rem 1rem 1.5rem 1rem;
+  /* margin-top: 2rem; */
+  display: flex;
+  gap: 56rem;
+  flex: 2;
+}
+.qustionBoxContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  margin-top: 2rem;
+}
+.update {
+  display: flex;
+  justify-content: end;
+  gap: 3rem;
+  width: 35rem;
+}
+.delete {
+  display: flex;
+  gap: 3rem;
+  cursor: pointer;
+}
+.edit {
+  color: var(--color-light);
+  text-decoration: none;
+  border: none;
+}
+.flex {
+  flex: 3;
+}

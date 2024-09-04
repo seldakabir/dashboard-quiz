@@ -15,7 +15,13 @@ function QuizProvider({ children }) {
   const [topic2, setQuizTopic2] = useState("");
   const [topic3, setQuizTopic3] = useState("");
   const [topic4, setQuizTopic4] = useState("");
-
+  const [question, setQuestion] = useState("");
+  const [option1, setOption1] = useState("");
+  const [option2, setOption2] = useState("");
+  const [option3, setOption3] = useState("");
+  const [option4, setOption4] = useState("");
+  const [correctOption, setCorrectOption] = useState("");
+  const [points, setPoints] = useState("");
   useEffect(function () {
     async function fetchQuiz() {
       try {
@@ -103,6 +109,20 @@ function QuizProvider({ children }) {
         topic4,
         setQuizTopic4,
         quizDelete,
+        question,
+        setQuestion,
+        option1,
+        setOption1,
+        option2,
+        setOption2,
+        option3,
+        setOption3,
+        option4,
+        setOption4,
+        correctOption,
+        setCorrectOption,
+        points,
+        setPoints,
       }}
     >
       {children}

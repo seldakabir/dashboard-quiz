@@ -4,14 +4,25 @@ import { UseQuiz } from "../../Contexts/QuizProvider";
 import { useNavigate, useParams } from "react-router-dom";
 import { Spinner } from "react-bootstrap";
 export default function EditQuiz() {
-  const [question, setQuestion] = useState("");
-  const [option1, setOption1] = useState("");
-  const [option2, setOption2] = useState("");
-  const [option3, setOption3] = useState("");
-  const [option4, setOption4] = useState("");
-  const [correctOption, setCorrectOption] = useState("");
-  const [points, setPoints] = useState("");
-  const { quizs, setQuizs, totalQuestions } = UseQuiz();
+  const {
+    quizs,
+    setQuizs,
+    totalQuestions,
+    question,
+    setQuestion,
+    option1,
+    setOption1,
+    option2,
+    setOption2,
+    option3,
+    setOption3,
+    option4,
+    setOption4,
+    correctOption,
+    setCorrectOption,
+    points,
+    setPoints,
+  } = UseQuiz();
   const { quizId } = useParams();
   const [selectedQuiz, setSelectedQuiz] = useState(null);
   const [questionCount, setQuestionCount] = useState(0);

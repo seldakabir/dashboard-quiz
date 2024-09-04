@@ -9,7 +9,7 @@ export default function LandingPage() {
       </p>
       <div className={styles.boxContainer}>
         <div className={styles.box}>
-          <Link to="/QuizStart">
+          <Link to="/SelectStartQuiz">
             <p className={styles.iconContainer}>
               <img
                 src="./images/hummer.jpg"

@@ -9,6 +9,7 @@ import { QuizProvider } from "./Contexts/QuizProvider";
 import CreateQuiz from "./Pages/CreateQuiz/CreateQuiz";
 import EditCurQuiz from "./Pages/EditCurQuiz/EditCurQuiz";
 import QuizStartPage from "./Pages/QuizStartPage/QuizStartPage";
+import SelectStartQuiz from "./Pages/SelectStartQuiz/SelectStartQuiz";
 
 function App() {
   return (
@@ -29,7 +30,11 @@ function App() {
               path="EditCurQuiz/:quizId/:questionCount"
               element={<EditCurQuiz />}
             />
-            <Route path="/QuizStart" element={<QuizStartPage />} />
+            <Route
+              path="/QuizStart/:quizId/:totalQuestions"
+              element={<QuizStartPage />}
+            />
+            <Route path="/SelectStartQuiz" element={<SelectStartQuiz />} />
           </Routes>
         </BrowserRouter>
       </QuizProvider>
