@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./QuizStartPage.module.css";
 import { Button } from "react-bootstrap";
 import { UseQuiz } from "../../Contexts/QuizProvider";
@@ -23,40 +23,46 @@ export default function QuizStartPage() {
   } = UseQuiz();
 
   const { quizId } = useParams();
+  const [selectQuestionIndex, setSelectQuestionIndex] = useState(0);
+
   const selectedQuiz = quizs.find((q) => q.id === Number(quizId));
+  let selected = selectedQuiz?.questions[selectQuestionIndex];
+  console.log("quiz:");
+  console.log(selected);
   function nextQuestion() {
-    selectedQuiz.questions.map((question, index) => {
-      setQuestion(selectedQuiz.questions[index].question);
-      setOption1(selectedQuiz.questions[index].options[0]);
-      setOption2(selectedQuiz.questions[index].options[1]);
-      setOption3(selectedQuiz.questions[index].options[2]);
-      setOption4(selectedQuiz.questions[index].options[3]);
-      setCorrectOption(selectedQuiz.correctOption);
-      setPoints(selectedQuiz.points);
-    });
+    selected = setSelectQuestionIndex(selectQuestionIndex + 1);
+    console.log(selected);
   }
+  function prevQuestion() {
+    if (selectQuestionIndex === 0) return;
+    selected = setSelectQuestionIndex(selectQuestionIndex - 1);
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.sidebar}>
-        {selectedQuiz.questions.map((question, index) => (
-          <div className={styles.number}>{index + 1}</div>
+        {selectedQuiz?.questions.map((question, index) => (
+          <div
+            className={`${styles.number} ${
+              selectQuestionIndex === index ? styles.numActive : ""
+            }`}
+          >
+            {index + 1}
+          </div>
         ))}
       </div>
       <div className={styles.main}>
         <div className={styles.header}>
-          <p>Question X</p>
+          <p>Question {selectQuestionIndex + 1}</p>
           <p>
-            {selectedQuiz.totalQuestions}/{selectedQuiz.totalQuestions}{" "}
-            Completed
+            {selectQuestionIndex + 1}/{selectedQuiz?.totalQuestions} Completed
           </p>
         </div>
         <form className={styles.page}>
-          <div className={styles.question}>
-            {selectedQuiz.questions[0].question}
-          </div>
+          <div className={styles.question}>{selected?.question}</div>
           <div className={styles.options}>
             <input type="radio" name="option"></input>
-            <label>{selectedQuiz.questions[0].options[0]}</label>
+            <label>{selected?.options[0]}</label>
           </div>
           <div className={styles.options}>
             <input
@@ -64,7 +70,7 @@ export default function QuizStartPage() {
               name="option"
               className={styles.options}
             ></input>
-            <label>{selectedQuiz.questions[0].options[1]}</label>
+            <label>{selected?.options[1]}</label>
           </div>
           <div className={styles.options}>
             <input
@@ -72,7 +78,7 @@ export default function QuizStartPage() {
               name="option"
               className={styles.options}
             ></input>
-            <label>{selectedQuiz.questions[0].options[2]}</label>
+            <label>{selected?.options[2]}</label>
           </div>
           <div className={styles.options}>
             <input
@@ -80,11 +86,15 @@ export default function QuizStartPage() {
               name="option"
               className={styles.options}
             ></input>
-            <label>{selectedQuiz.questions[0].options[3]}</label>
+            <label>{selected?.options[3]}</label>
           </div>
           <div className={styles.buttons}>
-            <Button>Previus Question</Button>
-            <Button>Next Question</Button>
+            <Button onClick={prevQuestion}>Previus Question </Button>
+            <Button onClick={nextQuestion}>
+              {selectQuestionIndex < selectedQuiz?.questions.length - 1
+                ? "Next Question"
+                : "confirm"}
+            </Button>
           </div>
         </form>
       </div>
