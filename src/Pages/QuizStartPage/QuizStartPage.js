@@ -4,40 +4,44 @@ import { Button } from "react-bootstrap";
 import { UseQuiz } from "../../Contexts/QuizProvider";
 import { useParams } from "react-router-dom";
 export default function QuizStartPage() {
-  const {
-    quizs,
-    question,
-    setQuestion,
-    option1,
-    setOption1,
-    option2,
-    setOption2,
-    option3,
-    setOption3,
-    option4,
-    setOption4,
-    correctOption,
-    setCorrectOption,
-    points,
-    setPoints,
-  } = UseQuiz();
+  const { quizs } = UseQuiz();
 
   const { quizId } = useParams();
   const [selectQuestionIndex, setSelectQuestionIndex] = useState(0);
+  const [answer, setAnswer] = useState("");
+  const [isCorrect, setIsCorrect] = useState(null);
 
   const selectedQuiz = quizs.find((q) => q.id === Number(quizId));
   let selected = selectedQuiz?.questions[selectQuestionIndex];
-  console.log("quiz:");
-  console.log(selected);
-  function nextQuestion() {
-    selected = setSelectQuestionIndex(selectQuestionIndex + 1);
-    console.log(selected);
-  }
-  function prevQuestion() {
-    if (selectQuestionIndex === 0) return;
-    selected = setSelectQuestionIndex(selectQuestionIndex - 1);
-  }
 
+  function handleOptionChange(e) {
+    const selectedOption = e.target.value;
+    setAnswer(selectedOption);
+    setAnswer(selected);
+    if (selectedOption === String(selected.correctOption)) {
+      setIsCorrect(true);
+    } else {
+      setIsCorrect(false);
+    }
+  }
+  const nextQuestion = () => {
+    if (selectQuestionIndex < selectedQuiz?.questions.length - 1) {
+      setSelectQuestionIndex(selectQuestionIndex + 1);
+      resetState();
+    }
+  };
+  const prevQuestion = () => {
+    if (selectQuestionIndex > 0) {
+      setSelectQuestionIndex(selectQuestionIndex - 1);
+      resetState();
+    }
+  };
+  const resetState = () => {
+    setAnswer("");
+    setIsCorrect(null);
+  };
+
+  function submitAnswer() {}
   return (
     <div className={styles.container}>
       <div className={styles.sidebar}>
@@ -60,34 +64,20 @@ export default function QuizStartPage() {
         </div>
         <form className={styles.page}>
           <div className={styles.question}>{selected?.question}</div>
-          <div className={styles.options}>
-            <input type="radio" name="option"></input>
-            <label>{selected?.options[0]}</label>
-          </div>
-          <div className={styles.options}>
-            <input
-              type="radio"
-              name="option"
-              className={styles.options}
-            ></input>
-            <label>{selected?.options[1]}</label>
-          </div>
-          <div className={styles.options}>
-            <input
-              type="radio"
-              name="option"
-              className={styles.options}
-            ></input>
-            <label>{selected?.options[2]}</label>
-          </div>
-          <div className={styles.options}>
-            <input
-              type="radio"
-              name="option"
-              className={styles.options}
-            ></input>
-            <label>{selected?.options[3]}</label>
-          </div>
+          {selected?.options.map((option, index) => (
+            <div className={styles.options} key={index}>
+              <input
+                type="radio"
+                id={`option${index}`}
+                name="option"
+                value={index + 1}
+                checked={answer === String(index + 1)}
+                onChange={handleOptionChange}
+              />
+              <label htmlFor={`option${index}`}>{option}</label>
+            </div>
+          ))}
+
           <div className={styles.buttons}>
             <Button onClick={prevQuestion}>Previus Question </Button>
             <Button onClick={nextQuestion}>
@@ -97,6 +87,16 @@ export default function QuizStartPage() {
             </Button>
           </div>
         </form>
+        <footer>
+          {isCorrect !== null && (
+            <div
+              className={styles.result}
+              style={{ color: isCorrect ? "green" : "red" }}
+            >
+              {isCorrect ? "Correct Answer!" : "Wrong Answer!"}
+            </div>
+          )}
+        </footer>
       </div>
     </div>
   );
