@@ -34,9 +34,6 @@ export default function EditQuiz() {
     if (quiz) {
       setQuestionCount(quiz.questions.length);
       setQuizTotalQuestions(quiz.totalQuestions);
-      console.log(quiz);
-      console.log(`"total"${quizTotalQuestions}`);
-      console.log(`"count"${questionCount}`);
     }
   }, [quizId, quizs, questionCount, quizTotalQuestions]);
 
@@ -64,7 +61,7 @@ export default function EditQuiz() {
     console.log(`"count"${questionCount}`);
     if (questionCount + 1 >= quizTotalQuestions) {
       navigate("/dashboard");
-      console.log(quizTotalQuestions);
+
       return;
     }
 
@@ -85,19 +82,7 @@ export default function EditQuiz() {
       )
     );
   }
-  function handleConfirm() {
-    if (questionCount >= quizTotalQuestions) {
-      alert(`You cannot add more than ${quizTotalQuestions} questions.`);
-      return;
-    }
-    if (!question) return alert("Please enter question");
-    if (!option1 && !option2 && !option3 && !option4)
-      return alert("Please enter option");
 
-    if (!points) return alert("Please enter point");
-    if (!correctOption) return alert("Please enter a correcctOption");
-    navigate("/dashboard");
-  }
   return (
     <div className={styles.container}>
       <hr className={styles.hrColor}></hr>
@@ -144,7 +129,7 @@ export default function EditQuiz() {
                 type="radio"
                 name="options"
                 value="1"
-                // checked={options === "1"}
+                checked={correctOption === 1}
                 onChange={(e) => setCorrectOption(Number(e.target.value))}
               />{" "}
             </div>
@@ -160,7 +145,7 @@ export default function EditQuiz() {
                 type="radio"
                 name="options"
                 value="2"
-                // checked={options === "2"}
+                checked={correctOption === 2}
                 onChange={(e) => setCorrectOption(Number(e.target.value))}
               />{" "}
             </div>
@@ -176,7 +161,7 @@ export default function EditQuiz() {
                 type="radio"
                 name="options"
                 value="3"
-                // checked={options === "3"}
+                checked={correctOption === 3}
                 onChange={(e) => setCorrectOption(Number(e.target.value))}
               />{" "}
             </div>
@@ -192,7 +177,7 @@ export default function EditQuiz() {
                 type="radio"
                 name="options"
                 value="4"
-                // checked={options === "4"}
+                checked={correctOption === 4}
                 onChange={(e) => setCorrectOption(Number(e.target.value))}
               />{" "}
             </div>
