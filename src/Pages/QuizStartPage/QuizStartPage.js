@@ -10,15 +10,18 @@ export default function QuizStartPage() {
   const [selectQuestionIndex, setSelectQuestionIndex] = useState(0);
   const [answer, setAnswer] = useState("");
   const [isCorrect, setIsCorrect] = useState(null);
+  const [selectedOption, setSelectedOption] = useState(null);
 
   const selectedQuiz = quizs.find((q) => q.id === Number(quizId));
   let selected = selectedQuiz?.questions[selectQuestionIndex];
 
   function handleOptionChange(e) {
-    const selectedOption = e.target.value;
-    setAnswer(selectedOption);
-    setAnswer(selected);
-    if (selectedOption === String(selected.correctOption)) {
+    const optionValue = e.target.value;
+    setSelectedOption(optionValue);
+
+    console.log(selectedOption);
+
+    if (optionValue === String(selected.correctOption)) {
       setIsCorrect(true);
     } else {
       setIsCorrect(false);
@@ -39,6 +42,7 @@ export default function QuizStartPage() {
   const resetState = () => {
     setAnswer("");
     setIsCorrect(null);
+    setSelectedOption(null);
   };
 
   function submitAnswer() {}
@@ -47,6 +51,7 @@ export default function QuizStartPage() {
       <div className={styles.sidebar}>
         {selectedQuiz?.questions.map((question, index) => (
           <div
+            key={index}
             className={`${styles.number} ${
               selectQuestionIndex === index ? styles.numActive : ""
             }`}
@@ -70,9 +75,10 @@ export default function QuizStartPage() {
                 type="radio"
                 id={`option${index}`}
                 name="option"
-                value={index + 1}
-                checked={answer === String(index + 1)}
+                value={index}
                 onChange={handleOptionChange}
+                disabled={selectedOption != null}
+                checked={selectedOption === String(index)}
               />
               <label htmlFor={`option${index}`}>{option}</label>
             </div>
