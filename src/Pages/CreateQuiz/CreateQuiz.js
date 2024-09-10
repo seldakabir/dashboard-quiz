@@ -56,7 +56,7 @@ export default function CreateQuiz() {
           </select>
           <input
             type="number"
-            placeholder="Enter Total Questions"
+            placeholder=" Total Questions"
             value={totalQuestions}
             onChange={(e) => {
               e.target.value < 0

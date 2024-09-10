@@ -38,7 +38,7 @@ export default function EditQuiz() {
       console.log(`"total"${quizTotalQuestions}`);
       console.log(`"count"${questionCount}`);
     }
-  }, [quizId, quizs]);
+  }, [quizId, quizs, questionCount, quizTotalQuestions]);
 
   if (!selectedQuiz) {
     return <Spinner />;

@@ -8,7 +8,7 @@ function QuizProvider({ children }) {
   const [quizs, setQuizs] = useState([]);
   const [title, setQuizTitle] = useState("");
   const [description, setQuizDescription] = useState("");
-  const [totalQuestions, setQuizTotalQuestions] = useState(0);
+  const [totalQuestions, setQuizTotalQuestions] = useState(null);
   const [status, setQuizStatus] = useState(true);
   const [topic, setQuizTopic] = useState([]);
   const [topic1, setQuizTopic1] = useState("");
@@ -22,19 +22,28 @@ function QuizProvider({ children }) {
   const [option4, setOption4] = useState("");
   const [correctOption, setCorrectOption] = useState("");
   const [points, setPoints] = useState("");
-  useEffect(function () {
-    async function fetchQuiz() {
-      try {
-        const res = await fetch("http://localhost:9000/quizs");
-        const data = await res.json();
-        setQuizs(data);
-        console.log(data);
-      } catch (err) {
-        console.log(err);
+  useEffect(
+    function () {
+      async function fetchQuiz() {
+        try {
+          const storedQuizData = localStorage.getItem("quizs");
+          if (storedQuizData) {
+            const parsedData = JSON.parse(storedQuizData);
+            setQuizs(parsedData);
+          } else {
+            const res = await fetch("http://localhost:9000/quizs");
+            const data = await res.json();
+            localStorage.setItem("quizs", JSON.stringify(data));
+            setQuizs(data);
+          }
+        } catch (err) {
+          console.log(err);
+        }
       }
-    }
-    fetchQuiz();
-  }, []);
+      fetchQuiz();
+    },
+    [setQuizs]
+  );
 
   function createQuizSubmit(e, navigate) {
     e.preventDefault();
@@ -45,7 +54,7 @@ function QuizProvider({ children }) {
       return alert("Please enter atleast one topic");
 
     const newQuiz = {
-      id: quizs.length + 1,
+      id: Date.now(),
       title,
       description,
       totalQuestions,
