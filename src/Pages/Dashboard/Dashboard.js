@@ -9,12 +9,14 @@ export default function Dashboard() {
   const [selectedQuiz, setSelectedQuiz] = useState("");
   const quiz = {};
   const navigateEdit = useNavigate();
+  const navigateStart = useNavigate();
   let selected = {};
   function getSelectedQuiz(id) {
     selected = quizs.find((q) => q.id === Number(id));
     setSelectedQuiz((selectedQuiz) => selected);
-    console.log(selected);
-    console.log(selected.title);
+  }
+  function getSelectedQuiz() {
+    navigateStart(`/SelectStartQuiz`);
   }
   function handleDeleteQuiz(id) {
     quizDelete(id);
@@ -51,6 +53,8 @@ export default function Dashboard() {
               </div>{" "}
               <div className={styles.delete}>
                 {" "}
+                getSelectedQuiz
+                <p onClick={() => getSelectedQuiz()}>Start a quiz</p>
                 <p onClick={() => handleDeleteQuiz(selected.id)}>DELETE</p>
                 <p
                   className={styles.edit}
