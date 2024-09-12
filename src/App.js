@@ -1,3 +1,4 @@
+import React from "react";
 import "./App.css";
 import Header from "./Components/Header/Header";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -15,9 +16,9 @@ import FinishedPage from "./Pages/FinishedPage/FinishedPage";
 function App() {
   return (
     <div className="app">
-      <Header />
       <QuizProvider>
         <BrowserRouter>
+          <Header />
           <Routes>
             <Route path="/" element={<HomePge />} />
             <Route path="landingPage" element={<LandingPage />} />
