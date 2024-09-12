@@ -25,6 +25,7 @@
 }
 .logo {
   width: 14rem;
+  cursor: pointer;
 }
 .image {
   width: 50%;

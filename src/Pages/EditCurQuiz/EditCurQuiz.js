@@ -3,6 +3,7 @@ import styles from "./EditCurQuiz.module.css";
 import { UseQuiz } from "../../Contexts/QuizProvider";
 import { useNavigate, useParams } from "react-router-dom";
 import { Spinner } from "react-bootstrap";
+import Input from "../../Components/Input/Input";
 export default function EditQuiz() {
   const [question, setQuestion] = useState("");
   const [option1, setOption1] = useState("");
@@ -106,24 +107,24 @@ export default function EditQuiz() {
           <div className={styles.line}></div>
 
           <form onSubmit={submitCorrectQuestions}>
-            <input
+            <Input
               placeholder="Question"
               value={question}
               onChange={(e) => setQuestion(e.target.value)}
-            ></input>
+            ></Input>
             <div className={styles.correctContainer}>
               <p>Options</p>
               <p>Correct</p>
             </div>
             <div className={styles.optionContainer}>
-              <input
+              <Input
                 type="text"
                 placeholder="Option 1"
                 className={styles.options}
                 value={option1}
                 onChange={(e) => setOption1(e.target.value)}
-              ></input>
-              <input
+              ></Input>
+              <Input
                 type="radio"
                 name="options"
                 value="1"
@@ -132,14 +133,14 @@ export default function EditQuiz() {
               />{" "}
             </div>
             <div className={styles.optionContainer}>
-              <input
+              <Input
                 type="text"
                 placeholder="Option 2"
                 value={option2}
                 onChange={(e) => setOption2(e.target.value)}
                 className={styles.options}
-              ></input>
-              <input
+              ></Input>
+              <Input
                 type="radio"
                 name="options"
                 value="2"
@@ -148,14 +149,14 @@ export default function EditQuiz() {
               />{" "}
             </div>
             <div className={styles.optionContainer}>
-              <input
+              <Input
                 placeholder="option 3"
                 type="text"
                 value={option3}
                 onChange={(e) => setOption3(e.target.value)}
                 className={styles.options}
-              ></input>
-              <input
+              ></Input>
+              <Input
                 type="radio"
                 name="options"
                 value="3"
@@ -164,14 +165,14 @@ export default function EditQuiz() {
               />{" "}
             </div>
             <div className={styles.optionContainer}>
-              <input
+              <Input
                 placeholder="option 4"
                 type="text"
                 value={option4}
                 onChange={(e) => setOption4(e.target.value)}
                 className={styles.options}
-              ></input>
-              <input
+              ></Input>
+              <Input
                 type="radio"
                 name="options"
                 value="4"
@@ -181,13 +182,13 @@ export default function EditQuiz() {
             </div>
 
             <div className={styles.footer}>
-              <input
+              <Input
                 placeholder="Point"
                 type="text"
                 value={points}
                 onChange={(e) => setPoints(Number(e.target.value))}
                 className={styles.points}
-              ></input>
+              ></Input>
               <div className={styles.star}>
                 *Marking a correct option is only allowed after you have already{" "}
                 written all options.
