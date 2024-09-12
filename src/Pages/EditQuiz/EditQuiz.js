@@ -27,6 +27,7 @@ export default function EditQuiz() {
   const [selectedQuiz, setSelectedQuiz] = useState(null);
   const [questionCount, setQuestionCount] = useState(0);
   const [quizTotalQuestions, setQuizTotalQuestions] = useState("");
+  const [currentTotalPoints, setCurrentTotalPoints] = useState(0);
   const navigate = useNavigate();
   useEffect(() => {
     const quiz = quizs.find((q) => q.id === Number(quizId));
@@ -34,6 +35,9 @@ export default function EditQuiz() {
     if (quiz) {
       setQuestionCount(quiz.questions.length);
       setQuizTotalQuestions(quiz.totalQuestions);
+      setCurrentTotalPoints(
+        quiz.questions.reduce((sum, q) => sum + q.points, 0)
+      );
     }
   }, [quizId, quizs, questionCount, quizTotalQuestions]);
 
@@ -49,6 +53,9 @@ export default function EditQuiz() {
 
     if (!points) return alert("Please enter point");
     if (!correctOption) return alert("Please enter a correcctOption");
+    if (currentTotalPoints + points > 100)
+      return alert("Total points cannot exceed 100");
+
     const newQuestions = {
       question,
       options: [option1, option2, option3, option4],
@@ -187,7 +194,11 @@ export default function EditQuiz() {
                 placeholder="Point"
                 type="text"
                 value={points}
-                onChange={(e) => setPoints(Number(e.target.value))}
+                onChange={(e) =>
+                  Number(e.target.value) > 100
+                    ? Number(e.target.value)
+                    : setPoints(Number(e.target.value))
+                }
                 className={styles.points}
               ></input>
               <div className={styles.star}>

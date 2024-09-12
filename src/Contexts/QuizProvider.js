@@ -22,6 +22,8 @@ function QuizProvider({ children }) {
   const [option4, setOption4] = useState("");
   const [correctOption, setCorrectOption] = useState("");
   const [points, setPoints] = useState("");
+  const [answerPoints, setAnswerPoints] = useState(0);
+
   useEffect(
     function () {
       async function fetchQuiz() {
@@ -132,6 +134,8 @@ function QuizProvider({ children }) {
         setCorrectOption,
         points,
         setPoints,
+        answerPoints,
+        setAnswerPoints,
       }}
     >
       {children}

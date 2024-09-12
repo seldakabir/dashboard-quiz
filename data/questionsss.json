@@ -5,7 +5,7 @@
       "title": "Check  javaScript knowledge",
       "Description": "this quiz is about your js skills",
       "status": "Active",
-      "totalQuestions": 20,
+      "totalQuestions": 3,
       "topic": ["Javascript", "js"],
 
       "questions": [

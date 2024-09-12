@@ -10,6 +10,7 @@ import CreateQuiz from "./Pages/CreateQuiz/CreateQuiz";
 import EditCurQuiz from "./Pages/EditCurQuiz/EditCurQuiz";
 import QuizStartPage from "./Pages/QuizStartPage/QuizStartPage";
 import SelectStartQuiz from "./Pages/SelectStartQuiz/SelectStartQuiz";
+import FinishedPage from "./Pages/FinishedPage/FinishedPage";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
               element={<QuizStartPage />}
             />
             <Route path="/SelectStartQuiz" element={<SelectStartQuiz />} />
+            <Route path="/FinishedPage" element={<FinishedPage />} />
           </Routes>
         </BrowserRouter>
       </QuizProvider>

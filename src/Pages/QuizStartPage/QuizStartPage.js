@@ -1,55 +1,65 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styles from "./QuizStartPage.module.css";
 import { Button } from "react-bootstrap";
 import { UseQuiz } from "../../Contexts/QuizProvider";
-import { useParams } from "react-router-dom";
-export default function QuizStartPage() {
-  const { quizs } = UseQuiz();
+import { useNavigate, useParams } from "react-router-dom";
 
+export default function QuizStartPage() {
+  const { quizs, answerPoints, setAnswerPoints } = UseQuiz();
   const { quizId } = useParams();
   const [selectQuestionIndex, setSelectQuestionIndex] = useState(0);
-  const [answer, setAnswer] = useState("");
   const [isCorrect, setIsCorrect] = useState(null);
   const [selectedOption, setSelectedOption] = useState(null);
-
   const selectedQuiz = quizs.find((q) => q.id === Number(quizId));
-  let selected = selectedQuiz?.questions[selectQuestionIndex];
+  const selected = selectedQuiz?.questions[selectQuestionIndex];
+  const navigateToFinish = useNavigate();
 
   function handleOptionChange(e) {
     const optionValue = e.target.value;
+
+    const point = selected.points;
+
     setSelectedOption(optionValue);
+    const correct = optionValue === String(selected.correctOption);
+    setIsCorrect(correct);
 
-    console.log(selectedOption);
-
-    if (optionValue === String(selected.correctOption)) {
-      setIsCorrect(true);
-    } else {
-      setIsCorrect(false);
+    if (isCorrect !== null) {
+      setAnswerPoints((prevPoints) => prevPoints + point);
+      console.log(answerPoints);
+      console.log(point);
     }
   }
+
   const nextQuestion = () => {
     if (selectQuestionIndex < selectedQuiz?.questions.length - 1) {
-      setSelectQuestionIndex(selectQuestionIndex + 1);
+      setSelectQuestionIndex((prevIndex) => prevIndex + 1);
       resetState();
+    } else {
+      navigateToFinish(`/FinishedPage`);
     }
   };
+
   const prevQuestion = () => {
     if (selectQuestionIndex > 0) {
-      setSelectQuestionIndex(selectQuestionIndex - 1);
+      setSelectQuestionIndex((prevIndex) => prevIndex - 1);
       resetState();
     }
   };
+
   const resetState = () => {
-    setAnswer("");
     setIsCorrect(null);
     setSelectedOption(null);
   };
 
-  function submitAnswer() {}
+  const submitAnswer = (e) => {
+    e.preventDefault();
+    nextQuestion();
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.sidebar}>
-        {selectedQuiz?.questions.map((question, index) => (
+        {selectedQuiz?.questions.map((_, index) => (
           <div
             key={index}
             className={`${styles.number} ${
@@ -67,7 +77,7 @@ export default function QuizStartPage() {
             {selectQuestionIndex + 1}/{selectedQuiz?.totalQuestions} Completed
           </p>
         </div>
-        <form className={styles.page}>
+        <form className={styles.page} onSubmit={submitAnswer}>
           <div className={styles.question}>{selected?.question}</div>
           {selected?.options.map((option, index) => (
             <div className={styles.options} key={index}>
@@ -85,11 +95,13 @@ export default function QuizStartPage() {
           ))}
 
           <div className={styles.buttons}>
-            <Button onClick={prevQuestion}>Previus Question </Button>
-            <Button onClick={nextQuestion}>
+            <Button onClick={prevQuestion} type="button">
+              Previous Question
+            </Button>
+            <Button type="submit">
               {selectQuestionIndex < selectedQuiz?.questions.length - 1
                 ? "Next Question"
-                : "confirm"}
+                : "Confirm"}
             </Button>
           </div>
         </form>
