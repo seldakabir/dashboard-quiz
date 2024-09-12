@@ -3,6 +3,7 @@ import styles from "./QuizStartPage.module.css";
 import { Button } from "react-bootstrap";
 import { UseQuiz } from "../../Contexts/QuizProvider";
 import { useNavigate, useParams } from "react-router-dom";
+import Input from "../../Components/Input/Input";
 
 export default function QuizStartPage() {
   const { quizs, answerPoints, setAnswerPoints } = UseQuiz();
@@ -81,7 +82,7 @@ export default function QuizStartPage() {
           <div className={styles.question}>{selected?.question}</div>
           {selected?.options.map((option, index) => (
             <div className={styles.options} key={index}>
-              <input
+              <Input
                 type="radio"
                 id={`option${index}`}
                 name="option"
