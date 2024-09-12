@@ -18,12 +18,6 @@ export default function Dashboard() {
   function goToSelectQuiz() {
     navigateStart("/SelectStartQuiz");
   }
-  function handleDeleteQuiz(id) {
-    quizDelete(id);
-    if (selectedQuiz?.id === id) {
-      setSelectedQuiz("");
-    }
-  }
 
   function navigateToEdit() {
     if (navigateEdit) {
@@ -54,7 +48,7 @@ export default function Dashboard() {
               <div className={styles.delete}>
                 {" "}
                 <p onClick={goToSelectQuiz}>Start a Quiz</p>
-                <p onClick={() => handleDeleteQuiz(selected.id)}>DELETE</p>
+                <p onClick={() => quizDelete(selected.id)}>DELETE</p>
                 <p
                   className={styles.edit}
                   onClick={() =>

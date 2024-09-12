@@ -89,10 +89,10 @@ function QuizProvider({ children }) {
       "Are you sure you want to delete this quiz?"
     );
     if (confirmed) {
+      console.log(id);
       const updatedQuizzes = quizs.filter((q) => q.id !== id);
 
       setQuizs(updatedQuizzes);
-      alert("Quiz deleted successfully!");
     }
   }
   return (
